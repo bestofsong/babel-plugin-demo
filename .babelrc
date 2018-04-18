@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    [
+      "env-checker",
+      {
+        "fileConstraints": [
+          {
+            "file": "src/index.js",
+            "constraints": [
+              {
+                "type": "export",
+                "name": "API_ENV",
+                "value": { "type": "enum", "values": ["prod", "sim", "dev"] }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  ]
+}
