@@ -72,6 +72,10 @@ babel-plugin-env-checker@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-env-checker/-/babel-plugin-env-checker-1.0.2.tgz#11299bd8e2a186af3e4a06d661e8c8f3a394803e"
 
+babel-plugin-transform-inline-environment-variables@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-inline-environment-variables/-/babel-plugin-transform-inline-environment-variables-0.4.0.tgz#365a38c1f6547801398d23a6f56d2f464ab4062c"
+
 babel-register@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-register/-/babel-register-6.26.0.tgz#6ed021173e2fcb486d7acb45c6009a856f647071"

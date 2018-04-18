@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src/* -d dist"
+    "build": "MY_ENV=de babel src -d dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-plugin-env-checker": "1.0.2"
+    "babel-plugin-env-checker": "1.0.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.0"
   }
 }
