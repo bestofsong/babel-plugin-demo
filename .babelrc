@@ -9,9 +9,19 @@
             "file": "src/index.js",
             "constraints": [
               {
-                "type": "export",
-                "name": "API_ENV",
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'API_ENV' ] && /:init StringLiteral [ @value ] ]",
                 "value": { "type": "enum", "values": ["prod", "sim", "dev"] }
+              },
+              {
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'FOO' ] && /:init StringLiteral [ @value ] ]",
+                "value": { "type": "literal", "value": "BAR" }
+              },
+              {
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'ANUM' ] && /:init NumericLiteral [ @value ] ]",
+                "value": { "type": "literal", "value": 123 }
               }
             ]
           }
