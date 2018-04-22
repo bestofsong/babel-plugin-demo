@@ -13,7 +13,7 @@
   "devDependencies": {
     "astq": "^2.2.4",
     "babel-core": "^6.26.0",
-    "babel-plugin-env-checker": "1.0.2",
+    "babel-plugin-static-assert": "^2.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.0"
   }
 }

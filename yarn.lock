@@ -86,9 +86,11 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-env-checker@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/babel-plugin-env-checker/-/babel-plugin-env-checker-1.0.2.tgz#11299bd8e2a186af3e4a06d661e8c8f3a394803e"
+babel-plugin-static-assert@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-static-assert/-/babel-plugin-static-assert-2.0.0.tgz#5930a585eb6130bc2f939f7d2c72b0df4e5f3e8c"
+  dependencies:
+    astq "^2.2.4"
 
 babel-plugin-transform-inline-environment-variables@^0.4.0:
   version "0.4.0"

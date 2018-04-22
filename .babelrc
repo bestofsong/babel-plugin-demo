@@ -2,7 +2,7 @@
   "plugins": [
     "transform-inline-environment-variables",
     [
-      "env-checker",
+      "static-assert",
       {
         "fileConstraints": [
           {
@@ -10,18 +10,88 @@
             "constraints": [
               {
                 "selector":
-                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'API_ENV' ] && /:init StringLiteral [ @value ] ]",
-                "value": { "type": "enum", "values": ["prod", "sim", "dev"] }
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'API_ENV' ] && /:init StringLiteral [ @value ] ]/:init *",
+                "def": { "type": "enum", "options": ["prod", "sim", "dev"] }
               },
               {
                 "selector":
-                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'FOO' ] && /:init StringLiteral [ @value ] ]",
-                "value": { "type": "literal", "value": "BAR" }
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'FOO' ] && /:init StringLiteral [ @value ] ]/:init *",
+                "def": { "type": "string", "value": "BAR" }
               },
               {
                 "selector":
-                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'ANUM' ] && /:init NumericLiteral [ @value ] ]",
-                "value": { "type": "literal", "value": 123 }
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'ANUM' ] && /:init NumericLiteral [ @value ] ]/:init *",
+                "def": { "type": "number", "value": 123 }
+              },
+              {
+                "selector":
+                "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'ANY_PRIMITIVE' ] && (/:init NumericLiteral || /:init StringLiteral) ]/:init *",
+                "def": { "type": "primitive" }
+              },
+              {
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'ARRAY_OF_ANY_PRIMITIVE' ] && /:init ArrayExpression ]/:init *",
+                "def": { "type": "array", "of": { "type": "primitive" } }
+              },
+              {
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'ARRAY_OF_ENUM' ] && /:init ArrayExpression ]/:init *",
+                "def": {
+                  "type": "array",
+                  "of": {
+                    "type": "tuple",
+                    "of": [
+                      { "type": "enum", "options": ["macbook", "surface", "thinkpad"] },
+                      { "type": "number" }
+                    ]
+                  }
+                }
+              },
+              {
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'ARRAY_OF_ANY_PRIMITIVE_WITH_LENGTH_REQUIREMENT' ] && /:init ArrayExpression ]/:init *",
+                "def": { "type": "array", "of": { "type": "primitive" }, "min-length": 2, "max-length": 10 }
+              },
+              {
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'ARRAY_OF_OBJECT' ] && /:init ArrayExpression ]/:init *",
+                "def": { "type": "array", "of": { "type": "object", "properties": [ ["name", { "type": "string" }], ["score", { "type": "number" }] ] } }
+              },
+              {
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'SIMPLE_OBJECT' ] && /:init ObjectExpression ]/:init *",
+                "def": {
+                  "type": "object",
+                  "properties": [
+                    ["foo", { "type": "string", "value": "bar" }],
+                    ["total", { "type": "number" }]
+                  ]
+                }
+              },
+              {
+                "selector":
+                  "// ExportNamedDeclaration/VariableDeclaration/VariableDeclarator [ /:id Identifier [ @name == 'COMPLEX_OBJECT' ] && /:init ObjectExpression ]/:init *",
+                "def": {
+                  "type": "object",
+                  "properties": [
+                    ["foo", { "type": "string", "value": "bar" }],
+                    ["params", {
+                      "type": "object",
+                      "properties": [
+                        ["page", { "type": "string", "value": "home" }],
+                        ["isFirst", { "type": "bool", "value": true }]
+                      ]
+                      }
+                    ],
+                    ["args", {
+                      "type": "array",
+                      "of": {
+                        "type": "tuple",
+                        "of": [{ "type": "string" }, { "type": "primitive" }]
+                      }
+                      }]
+                  ]
+                }
               }
             ]
           }
